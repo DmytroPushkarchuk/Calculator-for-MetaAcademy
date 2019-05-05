@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 
 public class Calculator {
 
+//----  wrapper class for logical operations	
 	Double memory = null;
 
 	Double firstNum = null;
@@ -24,7 +25,7 @@ public class Calculator {
 	Double result = null;
 	String operator = null;
 	Boolean clearTextField = false;
-	Boolean firstOper = true;
+	
 
 	static String bAll[] = { "MC", "M+", "M-", "MR", "<-", "C", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*", "1",
 			"2", "3", "/", ".", "0", "+/-", "=" };
@@ -37,9 +38,12 @@ public class Calculator {
 	private JTextField tField;
 	private Button allBtn[] = new Button[bAll.length];;
 
-//	private JLabel lbMemory;
 
-//-------------------------------------------------------------------------------------формування калькулятора в конструкторі
+
+		//	Boolean firstOper = true;
+		//	private JLabel lbMemory;
+
+
 
 	public Calculator() {
 
@@ -49,19 +53,20 @@ public class Calculator {
 		fCalculator.setResizable(false);
 		fCalculator.setLayout(null);
 
-//		lbMemory = new JLabel("M");
-//		lbMemory.setFont(new Font("Tahoma", Font.BOLD, 14));
-//		lbMemory.setBounds(0, 0, 25, 25);
-//		fCalculator.add(lbMemory);
+			//		lbMemory = new JLabel("M");
+			//		lbMemory.setFont(new Font("Tahoma", Font.BOLD, 14));
+			//		lbMemory.setBounds(0, 0, 25, 25);
+			//		fCalculator.add(lbMemory);
 
-		tField = new JTextField();
+		tField = new JTextField("0");
 		tField.requestFocusInWindow();
 		tField.setBounds(0, 0, 240, 60);
-		tField.setText("0");
 		tField.setFont(new Font("Century Gothic", Font.PLAIN, 35));
 		tField.setHorizontalAlignment(SwingConstants.RIGHT);
 		tField.setCaretColor(Color.WHITE);
 		tField.addKeyListener(new KeyAdapter() {
+			
+			// keyboard input Enter Backspace
 			public void keyPressed(KeyEvent e) {
 				int key = e.getKeyCode();
 				if (key == KeyEvent.VK_ENTER)
@@ -69,7 +74,8 @@ public class Calculator {
 				if (key == KeyEvent.VK_BACK_SPACE)
 					inputOperator("<-");
 			}
-
+			
+			// keyboard input 0..9, +, -, *, /, =
 			public void keyTyped(KeyEvent e) {
 				tField.setCaretPosition(tField.getText().length());
 				String str = String.valueOf(e.getKeyChar());
@@ -82,10 +88,10 @@ public class Calculator {
 		});
 		fCalculator.add(tField);
 
+		// initialization JButton
 		for (int i = 0; i < bAll.length; i++) {
 			int x = 0 + (i + 4) % 4 * 60;
 			int y = 60 + (i / 4) * 60;
-
 			allBtn[i] = new Button(bAll[i]);
 			allBtn[i].setFont(new Font("Century Gothic", Font.PLAIN, 20));
 			allBtn[i].setBounds(x, y, 60, 60);
@@ -93,6 +99,7 @@ public class Calculator {
 			allBtn[i].setForeground(Color.DARK_GRAY);
 			allBtn[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					
 					Button tmpBtn = (Button) arg0.getSource();
 					String tmpStr = tmpBtn.getLabel();
 					if (memoryBtn.contains(tmpStr))
@@ -101,7 +108,9 @@ public class Calculator {
 						inputInTextField(tmpStr);
 					if (operatorsBtn.contains(tmpStr))
 						inputOperator(tmpStr);
-					tField.requestFocusInWindow();// постійний фокус на TextField
+					
+					// foces on TextFile
+					tField.requestFocusInWindow();
 				}
 			});
 			fCalculator.getContentPane().add(allBtn[i]);
@@ -110,7 +119,7 @@ public class Calculator {
 		fCalculator.setVisible(true);
 	}
 
-//----------------------------------------------------------------------- робота з памятю
+//---------------------------------------------------------------------------- work with Memory
 
 	private void memoryBtn(String btnText) {
 
@@ -128,7 +137,7 @@ public class Calculator {
 			memory = memory - valueTextField;
 			break;
 		case "MR":
-			tField.setText(String.valueOf(memory));
+			tField.setText(converDoubleToText(memory));
 			break;
 		case "MC":
 			memory = null;
@@ -136,7 +145,7 @@ public class Calculator {
 		}
 	}
 
-// --------------------------------------------------------------- input 0..9, ".", "<-", "+/-", "C" 
+// -------------------------------------------------------------------- input 0..9, ".", "<-", "+/-", "C" 
 
 	private void inputInTextField(String btnText) {
 
@@ -170,12 +179,10 @@ public class Calculator {
 			break;
 
 		case "<-":
-			// 8 or -5 to 0
 			if (textField.length() == 1 || ((textField.length() == 2) && (textField.charAt(0) == '-'))) {
 				textField = "0";
 				break;
 			}
-			// -11.5 to -11.
 			if (textField.length() > 1) {
 				textField = textField.substring(0, textField.length() - 1);
 				break;
@@ -191,23 +198,19 @@ public class Calculator {
 			break;
 
 		case "+/-":
-
 			if (!((textField.charAt(0) == '0') && textField.length() == 1)) {
-
 				if (textField.charAt(0) == '-')
 					textField = textField.substring(1);
 				else
 					textField = "-" + textField;
-
 			}
-
 			break;
 		}
 
 		tField.setText(textField);
 	}
 
-// ----- input +, -, *, /, %, = ------------------------
+// --------------------------------------------------------------------------------- input +, -, *, /, %, = 
 
 	void inputOperator(String btnText) {
 
@@ -217,17 +220,15 @@ public class Calculator {
 		case "=":
 			outputEquals(btnText);
 			break;
-
 		case "+":
 		case "-":
 		case "*":
 		case "/":
-
-			if (firstNum != null && result == null && firstOper) {
-				outputEquals(btnText);
-				firstOper = false;
-			}
-			// -------- не вистачає крду для вирахування при натисненні
+			
+//			if (firstNum != null && result == null && firstOper) {
+//				outputEquals(btnText);
+//				firstOper = false;
+//			}
 
 			operator = btnText;
 			firstNum = tempNum;
@@ -235,15 +236,14 @@ public class Calculator {
 			result = null;
 			clearTextField = true;
 			break;
-
+			
 		case "%":
 			outputEquals(btnText);
 			break;
-
 		}
 	}
 
-	// ------- логіка розрахунків, математичні аперації
+// ------------------------------------------------------------------------ logic of calculations
 	void outputEquals(String btnText) {
 
 		double valueTextField = convertTextToDouble();
@@ -292,18 +292,15 @@ public class Calculator {
 				break;
 			case "/":
 				result = firstNum / secondNum;
+
+				if (operator == "/" && secondNum == 0) {
+					secondNum = null;
+					result = null;
+					operator = null;
+					clearTextField = true;
+					break;
+				}
 				break;
-
-//				if (operator == "/" && secondNum == 0) {
-//					firstNum = null;
-//					secondNum = null;
-//					result = null;
-//					operator = null;
-//					clearTextField = true;
-//					tField.setText("For 0 does not divide");
-//					break;
-//				}
-
 			}
 
 			firstNum = null;
@@ -311,25 +308,26 @@ public class Calculator {
 
 		}
 	}
-
+//--------------------------------------------------------------------------------conver DoubleToText, DoubleToText and fix problem
 	private String converDoubleToText(Double value) {
-		String tmpStr = String.valueOf(value);
-
-		while (tmpStr.charAt(tmpStr.length() - 1) == '0' || tmpStr.charAt(tmpStr.length() - 1) == '.') {
-			tmpStr = tmpStr.substring(0, tmpStr.length() - 1);
-
+		String tmpText = String.valueOf(value);
+		while ((tmpText.contains(".")) && (tmpText.charAt(tmpText.length() - 1) == '0' || tmpText.charAt(tmpText.length() - 1) == '.')) {
+			tmpText = tmpText.substring(0, tmpText.length() - 1);
 		}
-		return tmpStr;
-
+		return tmpText;
 	}
 
 	private Double convertTextToDouble() {
 		String tmpText = tField.getText();
 		if (tmpText.charAt(0) == '-' && Double.valueOf(tmpText.substring(1)) == 0) {
 			return (double) 0;
-		} else {
+		}if (tmpText == "Infinity") {
+			return (double) 0;
+		}if (tmpText == "null") {
+			return (double) 0;
+		} 
+		else {
 			return Double.valueOf(tmpText);
 		}
-
 	}
 }
