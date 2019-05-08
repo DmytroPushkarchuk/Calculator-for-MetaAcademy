@@ -1,6 +1,6 @@
 package calculatorConsole.calculators;
 
-public enum VarietyCalculator {
+public enum VersionCalculator {
 	ARABIC,
 	ROMANIC;
 }

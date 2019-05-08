@@ -10,8 +10,8 @@ public class FactoryInput {
 			return new LiteInput();
 		case FULL:
 			return new FullInput();
-
 		}
+		
 		return null;
 	}
 }

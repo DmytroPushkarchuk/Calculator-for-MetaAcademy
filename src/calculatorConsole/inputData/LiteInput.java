@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import calculatorConsole.Logic;
 import calculatorConsole.MyClass;
-import calculatorConsole.calculators.VarietyCalculator;
+import calculatorConsole.calculators.VersionCalculator;
 
 public class LiteInput extends Logic implements Input {
 
@@ -12,11 +12,10 @@ public class LiteInput extends Logic implements Input {
 		System.out.println("Lite version \n  0 <= Arabics numbs <= 10 \n  I <= Romanian numbs <= X");
 	}
 
-	MyClass myClass = new MyClass();
 	Scanner scanner = new Scanner(System.in);
 
 	@Override
-	public MyClass inputData() {
+	public void inputData(MyClass myClass) {
 
 		do {
 
@@ -32,11 +31,10 @@ public class LiteInput extends Logic implements Input {
 			myClass.second = scanner.next();
 			System.out.println(String.valueOf(correctData(myClass.second)));
 
-			myClass.varCalc = typeCalculator(myClass.first, myClass.second, myClass.operator);
+			myClass.versionCalculator = typeCalculator(myClass.first, myClass.second, myClass.operator);
 
-		} while (myClass.varCalc == null);
+		} while (myClass.versionCalculator == null);
 		
-		return myClass;
 	}
 
 	@Override
@@ -62,16 +60,16 @@ public class LiteInput extends Logic implements Input {
 	}
 
 	@Override
-	public VarietyCalculator typeCalculator(String first, String second, String operator) {
+	public VersionCalculator typeCalculator(String first, String second, String operator) {
 
 		if (correctData(first) && correctData(second) && correctOperator(operator)) {
 
 			if ((first.matches("\\d+")) && (second.matches("\\d+"))) {
-				return VarietyCalculator.ARABIC;
+				return VersionCalculator.ARABIC;
 			}
 
 			if (((first.matches("[M,D,C,L,X,V,I]")) && (second.matches("[M,D,C,L,X,V,I]")))) {
-				return VarietyCalculator.ROMANIC;
+				return VersionCalculator.ROMANIC;
 			}
 
 		}

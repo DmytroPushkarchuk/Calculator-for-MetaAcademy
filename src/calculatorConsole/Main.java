@@ -12,38 +12,35 @@ public class Main extends Logic {
 
 	public static void main(String[] args) {
 
+		MyClass myClass = new MyClass();
 		FactoryInput factoryInput = new FactoryInput();
 		FactoryCalculator factoryCalculator = new FactoryCalculator();
 
 		Scanner scanner = new Scanner(System.in);
-
 		String str;
-		VersionInput verInp = null;
+		
+		VersionInput versionInput = null;
 
 		do {
 			System.out.println("Lite or Full? (1/2)");
 			str = scanner.next();
 			switch (str) {
 			case "1":
-				verInp = VersionInput.LITE;
+				versionInput = VersionInput.LITE;
 				break;
 			case "2":
-				verInp = VersionInput.FULL;
+				versionInput = VersionInput.FULL;
 				break;
 			}
-
-		} while (verInp == null);
-
-		Input input = factoryInput.createInput(verInp);
-
-		MyClass myClass = input.inputData();
+		} while (versionInput == null);
+		
+		Input input = factoryInput.createInput(versionInput);
+		input.inputData(myClass);
+		
+		Calculator calculator = factoryCalculator.createCalculator(myClass.versionCalculator);
+		calculator.calculation(myClass);
 
 		scanner.close();
-
-		Calculator calculator = factoryCalculator.createCalculator(myClass.varCalc);
-
-		System.out.println(calculator.calculation(myClass.first, myClass.operator, myClass.second));
-
 	}
 
 }

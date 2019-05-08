@@ -1,6 +1,6 @@
 package calculatorConsole;
 
-import calculatorConsole.calculators.VarietyCalculator;
+import calculatorConsole.calculators.VersionCalculator;
 
 public class Logic {
 
@@ -124,16 +124,16 @@ public class Logic {
 		return false;
 	}
 
-	public VarietyCalculator typeCalculator(String first, String second, String operator) {
+	public VersionCalculator typeCalculator(String first, String second, String operator) {
 
 		if (correctData(first) && correctData(second) && correctOperator(operator)) {
 
 			if ((first.matches("\\d+")) && (second.matches("\\d+"))) {
-				return VarietyCalculator.ARABIC;
+				return VersionCalculator.ARABIC;
 			}
 
 			if (((first.matches("[M,D,C,L,X,V,I]")) && (second.matches("[M,D,C,L,X,V,I]")))) {
-				return VarietyCalculator.ROMANIC;
+				return VersionCalculator.ROMANIC;
 			}
 
 		}

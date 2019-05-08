@@ -14,7 +14,7 @@ public class FullInput extends Logic implements Input {
 	}
 
 	@Override
-	public MyClass inputData() {
+	public void inputData(MyClass myClass) {
 		do {
 
 			System.out.println("please enter the first number");
@@ -29,11 +29,10 @@ public class FullInput extends Logic implements Input {
 			myClass.second = input.next();
 			System.out.println(String.valueOf(correctData(myClass.second)));
 
-			myClass.varCalc = typeCalculator(myClass.first, myClass.second, myClass.operator);
+			myClass.versionCalculator = typeCalculator(myClass.first, myClass.second, myClass.operator);
 
-		} while (myClass.varCalc == null);
+		} while (myClass.versionCalculator == null);
 
-		return myClass;
 	}
 
 }

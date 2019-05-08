@@ -1,10 +1,10 @@
 package calculatorConsole;
 
-import calculatorConsole.calculators.VarietyCalculator;
+import calculatorConsole.calculators.VersionCalculator;
 
 public class MyClass {
 	
-	public VarietyCalculator varCalc = null;
+	public VersionCalculator versionCalculator = null;
 	public String first;
 	public String second;
 	public String operator;

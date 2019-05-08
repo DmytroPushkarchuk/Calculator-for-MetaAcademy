@@ -1,17 +1,18 @@
 package calculatorConsole.calculators;
 
 import calculatorConsole.Logic;
+import calculatorConsole.MyClass;
 
 public class RomanCalculator extends Logic implements Calculator {
 
 	@Override
-	public String calculation(String first, String operator, String second) {
+	public void calculation(MyClass myClass) {
 		
-		int firstNub = convertRomanToArabic(first);
-		int secondNum = convertRomanToArabic(second);
+		int firstNub = convertRomanToArabic(myClass.first);
+		int secondNum = convertRomanToArabic(myClass.second);
 		int result = 0;
 
-		switch (operator) {
+		switch (myClass.operator) {
 		case "+":
 			result = firstNub + secondNum;
 			break;
@@ -25,7 +26,8 @@ public class RomanCalculator extends Logic implements Calculator {
 			result = firstNub / secondNum;
 			break;
 		}
-		return first + " " + operator + " " + second + " = " +  convertArabicToRoman(result);
+		
+		System.out.println(myClass.first + " " + myClass.operator + " " + myClass.second + " = " +  convertArabicToRoman(result));
 
 	}
 		

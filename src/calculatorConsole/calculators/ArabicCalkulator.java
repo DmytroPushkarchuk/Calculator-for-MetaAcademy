@@ -1,16 +1,17 @@
 package calculatorConsole.calculators;
 
 import calculatorConsole.Logic;
+import calculatorConsole.MyClass;
 
 public class ArabicCalkulator extends Logic implements Calculator {
 
-	public String calculation(String first, String operator, String second) {
+	public void calculation(MyClass myClass) {
 
-		int firstNub = Integer.valueOf(first);
-		int secondNum = Integer.valueOf(second);
+		int firstNub = Integer.valueOf(myClass.first);
+		int secondNum = Integer.valueOf(myClass.second);
 		int result = 0;
 
-		switch (operator) {
+		switch (myClass.operator) {
 		case "+":
 			result = firstNub + secondNum;
 			break;
@@ -22,11 +23,12 @@ public class ArabicCalkulator extends Logic implements Calculator {
 			break;
 		case "/":
 			if (secondNum == 0)
-				return "На 0 неділиться!";
+//				 return "На 0 неділиться!";
 			result = firstNub / secondNum;
 			break;
 		}
-		return first + " " + operator + " " + second + " = " +  String.valueOf(result);
+		
+		System.out.println(myClass.first + " " + myClass.operator + " " + myClass.second + " = " +  String.valueOf(result));
 
 	}
 }

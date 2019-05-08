@@ -1,8 +1,10 @@
 package calculatorConsole.calculators;
 
+import calculatorConsole.MyClass;
+
 public interface Calculator {
 	
-	String calculation (String first, String operator, String second);
+	void calculation (MyClass myClass);
 }
 	
 	

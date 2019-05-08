@@ -2,7 +2,7 @@ package calculatorConsole.calculators;
 
 public class FactoryCalculator  {
 
-	public Calculator createCalculator(VarietyCalculator str) {
+	public Calculator createCalculator(VersionCalculator str) {
 		Calculator tmpCAlculator = null;
 
 		switch (str) {
