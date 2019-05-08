@@ -1,4 +1,4 @@
-package calculator;
+package calculatorDesktop;
 
 import java.awt.EventQueue;
 
@@ -17,5 +17,4 @@ public class Main {
 			}
 		});
 	}
-
 }
