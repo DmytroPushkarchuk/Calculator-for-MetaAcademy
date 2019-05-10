@@ -8,11 +8,11 @@ import calculatorConsole.inputData.FactoryInput;
 import calculatorConsole.inputData.Input;
 import calculatorConsole.inputData.VersionInput;
 
-public class Main extends Logic {
+public class Main {
 
 	public static void main(String[] args) {
 
-		MyClass myClass = new MyClass();
+		Data data = new Data();
 		FactoryInput factoryInput = new FactoryInput();
 		FactoryCalculator factoryCalculator = new FactoryCalculator();
 
@@ -22,23 +22,24 @@ public class Main extends Logic {
 		VersionInput versionInput = null;
 
 		do {
-			System.out.println("Lite or Full? (1/2)");
+			System.out.println("Lite or Medium? (1/2)");
 			str = scanner.next();
 			switch (str) {
 			case "1":
 				versionInput = VersionInput.LITE;
 				break;
 			case "2":
-				versionInput = VersionInput.FULL;
+				versionInput = VersionInput.MEDIUM;
 				break;
 			}
 		} while (versionInput == null);
 		
-		Input input = factoryInput.createInput(versionInput);
-		input.inputData(myClass);
 		
-		Calculator calculator = factoryCalculator.createCalculator(myClass.versionCalculator);
-		calculator.calculation(myClass);
+		Input input = factoryInput.createInput(versionInput);
+		input.inputData(data);
+		
+		Calculator calculator = factoryCalculator.createCalculator(data.versionCalculator);
+		calculator.calculation(data);
 
 		scanner.close();
 	}

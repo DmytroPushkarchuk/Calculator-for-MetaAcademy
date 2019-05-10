@@ -8,8 +8,8 @@ public class FactoryInput {
 		switch (verInput) {
 		case LITE:
 			return new LiteInput();
-		case FULL:
-			return new FullInput();
+		case MEDIUM:
+			return new MediumInput();
 		}
 		
 		return null;

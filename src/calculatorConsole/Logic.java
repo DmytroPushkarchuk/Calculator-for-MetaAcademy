@@ -42,7 +42,7 @@ public class Logic {
 	public String convertArabicToRoman(int input) {
 
 		if (input < 1 || input > 3999)
-			return "Invalid Roman Number Value";
+			return "invalid roman number value";
 		String s = "";
 
 		while (input >= 1000) {
@@ -107,9 +107,9 @@ public class Logic {
 		if (data.matches("\\d+"))
 			return true;
 
-		if (data.matches("[M,D,C,L,X,V,I]")) {
+		if (data.matches("[MDCLXVI]+")) {
 			tmpInt = convertRomanToArabic(data);
-			if (data.equals(convertArabicToRoman(tmpInt))) 
+			if (data.equals(convertArabicToRoman(tmpInt)))
 				return true;
 		}
 
@@ -118,7 +118,7 @@ public class Logic {
 
 	public Boolean correctOperator(String data) {
 
-		if (data.matches("[+,-,*,/]") && data.length() == 1)
+		if (data.matches("[+-/]"))
 			return true;
 
 		return false;
@@ -128,13 +128,11 @@ public class Logic {
 
 		if (correctData(first) && correctData(second) && correctOperator(operator)) {
 
-			if ((first.matches("\\d+")) && (second.matches("\\d+"))) {
+			if ((first.matches("\\d+")) && (second.matches("\\d+")))
 				return VersionCalculator.ARABIC;
-			}
 
-			if (((first.matches("[M,D,C,L,X,V,I]")) && (second.matches("[M,D,C,L,X,V,I]")))) {
+			if ((first.matches("[MDCLXVI]+")) && (second.matches("[MDCLXVI]+")))
 				return VersionCalculator.ROMANIC;
-			}
 
 		}
 		return null;

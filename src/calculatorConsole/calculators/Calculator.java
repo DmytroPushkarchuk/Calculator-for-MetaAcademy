@@ -1,10 +1,10 @@
 package calculatorConsole.calculators;
 
-import calculatorConsole.MyClass;
+import calculatorConsole.Data;
 
 public interface Calculator {
 	
-	void calculation (MyClass myClass);
+	void calculation (Data myClass);
 }
 	
 	

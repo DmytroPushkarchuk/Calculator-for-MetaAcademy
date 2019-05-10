@@ -1,9 +1,9 @@
 package calculatorConsole.inputData;
 
-import calculatorConsole.MyClass;
+import calculatorConsole.Data;
 
 public interface Input {
 
-	void inputData(MyClass myClass);
+	void inputData(Data myClass);
 
 }

@@ -3,38 +3,44 @@ package calculatorConsole.inputData;
 import java.util.Scanner;
 
 import calculatorConsole.Logic;
-import calculatorConsole.MyClass;
+import calculatorConsole.Data;
 import calculatorConsole.calculators.VersionCalculator;
 
 public class LiteInput extends Logic implements Input {
 
-	public LiteInput() {
-		System.out.println("Lite version \n  0 <= Arabics numbs <= 10 \n  I <= Romanian numbs <= X");
-	}
-
 	Scanner scanner = new Scanner(System.in);
 
+	public LiteInput() {
+		System.out.println("Lite version \n" + 
+				"  0 <= Arabics numbs <= 10 \n" + 
+				"  I <= Romans numbs <= X\n");
+	}
+
 	@Override
-	public void inputData(MyClass myClass) {
+	public void inputData(Data myClass) {
 
 		do {
 
-			System.out.println("please enter the first number");
-			myClass.first = scanner.next();
-			System.out.println(String.valueOf(correctData(myClass.first)));
+			System.out.print("please enter the first number:  ");
+			myClass.first = scanner.next().toUpperCase();
+			System.out.println(String.valueOf(correctData(myClass.first))+"\n");
 
-			System.out.println("please enter the operator");
+			System.out.print("please enter the operator:      ");
 			myClass.operator = scanner.next();
-			System.out.println(String.valueOf(correctOperator(myClass.operator)));
+			System.out.println(String.valueOf(correctOperator(myClass.operator))+"\n");
 
-			System.out.println("please enter the second number");
-			myClass.second = scanner.next();
-			System.out.println(String.valueOf(correctData(myClass.second)));
+			System.out.print("please enter the second number: ");
+			myClass.second = scanner.next().toUpperCase();
 
 			myClass.versionCalculator = typeCalculator(myClass.first, myClass.second, myClass.operator);
+			System.out.println(String.valueOf(correctData(myClass.second))+"\n");
+			
+			if (myClass.versionCalculator == null) 
+				System.out.println("incorrect data, try again \n");
+				
 
 		} while (myClass.versionCalculator == null);
-		
+
 	}
 
 	@Override
@@ -49,7 +55,7 @@ public class LiteInput extends Logic implements Input {
 			}
 		}
 
-		if (data.matches("[M,D,C,L,X,V,I]")) {
+		if (data.matches("[MDCLXVI]+")) {
 			tmpInt = convertRomanToArabic(data);
 			if (data.equals(convertArabicToRoman(tmpInt)) && (1 <= tmpInt && tmpInt <= 10)) {
 				return true;
@@ -68,11 +74,11 @@ public class LiteInput extends Logic implements Input {
 				return VersionCalculator.ARABIC;
 			}
 
-			if (((first.matches("[M,D,C,L,X,V,I]")) && (second.matches("[M,D,C,L,X,V,I]")))) {
+			if ((first.matches("[MDCLXVI]+")) && (second.matches("[MDCLXVI]+"))) {
 				return VersionCalculator.ROMANIC;
 			}
-
 		}
+
 		return null;
 	}
 

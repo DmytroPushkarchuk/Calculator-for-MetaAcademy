@@ -1,12 +1,12 @@
 package calculatorConsole.calculators;
 
 import calculatorConsole.Logic;
-import calculatorConsole.MyClass;
+import calculatorConsole.Data;
 
 public class RomanCalculator extends Logic implements Calculator {
 
 	@Override
-	public void calculation(MyClass myClass) {
+	public void calculation(Data myClass) {
 		
 		int firstNub = convertRomanToArabic(myClass.first);
 		int secondNum = convertRomanToArabic(myClass.second);
@@ -26,6 +26,16 @@ public class RomanCalculator extends Logic implements Calculator {
 			result = firstNub / secondNum;
 			break;
 		}
+		
+//		if (myClass.operator.equals("/") && secondNum == 0) {
+//			System.out.println(
+//					myClass.first + " " + myClass.operator + " " + myClass.second + " = for 0 does not divide");
+//		} else {
+//			System.out.println(
+//					myClass.first + " " + myClass.operator + " " + myClass.second + " = " + String.valueOf(result));
+//		}
+		
+		
 		
 		System.out.println(myClass.first + " " + myClass.operator + " " + myClass.second + " = " +  convertArabicToRoman(result));
 

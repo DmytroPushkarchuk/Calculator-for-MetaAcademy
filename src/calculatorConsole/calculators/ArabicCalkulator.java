@@ -1,34 +1,40 @@
 package calculatorConsole.calculators;
 
 import calculatorConsole.Logic;
-import calculatorConsole.MyClass;
+import calculatorConsole.Data;
 
 public class ArabicCalkulator extends Logic implements Calculator {
 
-	public void calculation(MyClass myClass) {
+	public void calculation(Data myClass) {
 
-		int firstNub = Integer.valueOf(myClass.first);
-		int secondNum = Integer.valueOf(myClass.second);
-		int result = 0;
+		long firstNub = Integer.valueOf(myClass.first);
+		long secondNum = Integer.valueOf(myClass.second);
+		long result = 0L;
 
 		switch (myClass.operator) {
 		case "+":
-			result = firstNub + secondNum;
+			result = (firstNub + secondNum);
 			break;
 		case "-":
-			result = firstNub - secondNum;
+			result = (firstNub - secondNum);
 			break;
 		case "*":
-			result = firstNub * secondNum;
+			result =  (firstNub * secondNum);
 			break;
 		case "/":
-			if (secondNum == 0)
-//				 return "На 0 неділиться!";
-			result = firstNub / secondNum;
+			if (secondNum != 0) {
+				result = (firstNub / secondNum);
+			}
 			break;
 		}
-		
-		System.out.println(myClass.first + " " + myClass.operator + " " + myClass.second + " = " +  String.valueOf(result));
+
+		if (myClass.operator.equals("/") && secondNum == 0) {
+			System.out.println(
+					myClass.first + " " + myClass.operator + " " + myClass.second + " = for 0 does not divide");
+		} else {
+			System.out.println(
+					myClass.first + " " + myClass.operator + " " + myClass.second + " = " + String.valueOf(result));
+		}
 
 	}
 }
