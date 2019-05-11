@@ -10,6 +10,8 @@ public class FactoryInput {
 			return new LiteInput();
 		case MEDIUM:
 			return new MediumInput();
+		case NEW:
+			return new NewInput();
 		}
 		
 		return null;

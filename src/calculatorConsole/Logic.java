@@ -4,27 +4,74 @@ import calculatorConsole.calculators.VersionCalculator;
 
 public class Logic {
 
-	private static int decodeSingle(char letter) {
-		switch (letter) {
-		case 'M':
-			return 1000;
-		case 'D':
-			return 500;
-		case 'C':
-			return 100;
-		case 'L':
-			return 50;
-		case 'X':
-			return 10;
-		case 'V':
-			return 5;
-		case 'I':
-			return 1;
-		default:
-			return 0;
+//	визначення типу калькулятора, некоректний вираз = null
+	public VersionCalculator typeCalculator(String data) {
+		
+// 		масив чисел
+		String[] numbers = data.split("[+*/-]");
+//		масив операторів
+		String[] operators = data.split("[MDCLXVI0-9]+");
+		VersionCalculator[] type = new VersionCalculator[numbers.length];
+
+//		перевірка операторів
+		for (int i = 1; i < operators.length; i++) {
+			if (!correctOperaror(operators[i])) {
+				System.out.println("некоректний оператор №" + i);
+				return null;
+			}
 		}
+
+//		перевірка всіх чисел на коректність
+		for (int i = 0; i < numbers.length; i++) {
+			if (!(correctNumber(numbers[i]))) {
+				System.out.println("некоректне число №" + ++i);
+				return null;
+			}
+		}
+
+// 		визначає тип кожного числа		
+		for (int i = 0; i < type.length; i++) {
+			if (numbers[i].matches("\\d+"))
+				type[i] = VersionCalculator.ARABIC;
+			if (numbers[i].matches("[MDCLXVI]+"))
+				type[i] = VersionCalculator.ROMAN;
+		}
+
+//		перевіряє чи всі елементи масиву оного типу
+		for (int i = 1; i < type.length; i++) {
+			if (type[i - 1] != type[i]) {
+				System.out.println("Всі число повинні бути одного типу");
+				return null;
+			}
+		}
+
+		return type[0];
 	}
 
+//	перевірка на коректність числа
+	public Boolean correctNumber(String data) {
+		int tmpInt;
+
+		if (data.matches("\\d+"))
+			return true;
+
+		if (data.matches("[MDCLXVI]+")) {
+			tmpInt = convertRomanToArabic(data);
+			if (data.equals(convertArabicToRoman(tmpInt)))
+				return true;
+		}
+
+		return false;
+	}
+
+//	перевірка на коректність оператора
+	public Boolean correctOperaror(String data) {
+		if (data.matches("[+*/-]")) 
+			return true;
+		return false;
+	}
+
+//	перетворення римських цифер в арабські
 	public int convertRomanToArabic(String roman) {
 		int result = 0;
 		String uRoman = roman.toUpperCase();
@@ -39,6 +86,7 @@ public class Logic {
 		return result;
 	}
 
+//	перетвонення арабських цифер і римські
 	public String convertArabicToRoman(int input) {
 
 		if (input < 1 || input > 3999)
@@ -100,42 +148,25 @@ public class Logic {
 		return s;
 	}
 
-	public Boolean correctData(String data) {
-
-		int tmpInt;
-
-		if (data.matches("\\d+"))
-			return true;
-
-		if (data.matches("[MDCLXVI]+")) {
-			tmpInt = convertRomanToArabic(data);
-			if (data.equals(convertArabicToRoman(tmpInt)))
-				return true;
+	private static int decodeSingle(char letter) {
+		switch (letter) {
+		case 'M':
+			return 1000;
+		case 'D':
+			return 500;
+		case 'C':
+			return 100;
+		case 'L':
+			return 50;
+		case 'X':
+			return 10;
+		case 'V':
+			return 5;
+		case 'I':
+			return 1;
+		default:
+			return 0;
 		}
-
-		return false;
-	}
-
-	public Boolean correctOperator(String data) {
-
-		if (data.matches("[+-/]"))
-			return true;
-
-		return false;
-	}
-
-	public VersionCalculator typeCalculator(String first, String second, String operator) {
-
-		if (correctData(first) && correctData(second) && correctOperator(operator)) {
-
-			if ((first.matches("\\d+")) && (second.matches("\\d+")))
-				return VersionCalculator.ARABIC;
-
-			if ((first.matches("[MDCLXVI]+")) && (second.matches("[MDCLXVI]+")))
-				return VersionCalculator.ROMANIC;
-
-		}
-		return null;
 	}
 
 }

@@ -4,6 +4,6 @@ import calculatorConsole.Data;
 
 public interface Input {
 
-	void inputData(Data myClass);
+	void inputData(Data data);
 
 }

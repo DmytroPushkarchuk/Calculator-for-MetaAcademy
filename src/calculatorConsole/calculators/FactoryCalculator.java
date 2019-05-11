@@ -9,7 +9,7 @@ public class FactoryCalculator  {
 		case ARABIC:
 			tmpCAlculator = new ArabicCalkulator();
 			break;
-		case ROMANIC:
+		case ROMAN:
 			tmpCAlculator = new RomanCalculator();
 			break;
 		}

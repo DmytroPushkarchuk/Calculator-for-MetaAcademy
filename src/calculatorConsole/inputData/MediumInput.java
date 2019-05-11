@@ -2,8 +2,8 @@ package calculatorConsole.inputData;
 
 import java.util.Scanner;
 
-import calculatorConsole.Logic;
 import calculatorConsole.Data;
+import calculatorConsole.Logic;
 
 public class MediumInput extends Logic implements Input {
 	Data myClass = new Data();
@@ -15,27 +15,33 @@ public class MediumInput extends Logic implements Input {
 	}
 
 	@Override
-	public void inputData(Data myClass) {
+	public void inputData(Data data) {
 		do {
+			String str = null;
+			String tmpStr = null;
 
 			System.out.print("please enter the first number:  ");
-			myClass.first = scanner.next().toUpperCase();
-			System.out.println(String.valueOf(correctData(myClass.first)) + "\n");
+			tmpStr = scanner.next().toUpperCase();
+			str = tmpStr;
+			System.out.println(correctNumber(tmpStr) + "\n");
 
 			System.out.print("please enter the operator:      ");
-			myClass.operator = scanner.next();
-			System.out.println(String.valueOf(correctOperator(myClass.operator)) + "\n");
+			tmpStr = scanner.next();
+			System.out.println(correctOperaror(tmpStr) + "\n");
+			str += tmpStr;
 
 			System.out.print("please enter the second number: ");
-			myClass.second = scanner.next().toUpperCase();
+			tmpStr = scanner.next().toUpperCase();
+			System.out.println(correctNumber(tmpStr) + "\n");
+			str += tmpStr;
+			
+			data.matheExpression = str;
+			
+			data.versionCalculator = typeCalculator(tmpStr);
+			System.out.println(data.versionCalculator);
+			System.out.println(data.matheExpression);
 
-			myClass.versionCalculator = typeCalculator(myClass.first, myClass.second, myClass.operator);
-			System.out.println(String.valueOf(correctData(myClass.second)) + "\n");
-
-			if (myClass.versionCalculator == null)
-				System.out.println("incorrect data, try again \n");
-
-		} while (myClass.versionCalculator == null);
+		} while (data.versionCalculator == null);
 
 	}
 

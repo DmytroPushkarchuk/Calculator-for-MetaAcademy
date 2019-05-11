@@ -11,18 +11,19 @@ import calculatorConsole.inputData.VersionInput;
 public class Main {
 
 	public static void main(String[] args) {
-
+		
 		Data data = new Data();
 		FactoryInput factoryInput = new FactoryInput();
 		FactoryCalculator factoryCalculator = new FactoryCalculator();
+		
+		String str;
 
 		Scanner scanner = new Scanner(System.in);
-		String str;
 		
 		VersionInput versionInput = null;
 
 		do {
-			System.out.println("Lite or Medium? (1/2)");
+			System.out.println("Lite, Medium, NEW? (1/2/3)");
 			str = scanner.next();
 			switch (str) {
 			case "1":
@@ -31,7 +32,11 @@ public class Main {
 			case "2":
 				versionInput = VersionInput.MEDIUM;
 				break;
+			case "3":
+				versionInput = VersionInput.NEW;
+				break;
 			}
+			
 		} while (versionInput == null);
 		
 		
