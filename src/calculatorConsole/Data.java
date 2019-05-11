@@ -4,6 +4,6 @@ import calculatorConsole.calculators.VersionCalculator;
 
 public class Data {
 	
-	public VersionCalculator versionCalculator = null;
+	public VersionCalculator versionCalculator;
 	public String matheExpression;
 }

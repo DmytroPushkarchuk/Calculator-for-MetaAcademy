@@ -1,7 +1,8 @@
 package calculatorConsole.inputData;
 
 public enum VersionInput {
-	MEDIUM,
-	LITE,
-	NEW;
+	ONE_LIMIT,
+	ONE_NO_LIMIT,
+	MULTI_LIMIT,
+	MULTI_NO_LIMIT;
 }

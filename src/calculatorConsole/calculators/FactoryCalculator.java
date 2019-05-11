@@ -1,18 +1,15 @@
 package calculatorConsole.calculators;
 
-public class FactoryCalculator  {
+public class FactoryCalculator {
 
 	public Calculator createCalculator(VersionCalculator str) {
-		Calculator tmpCAlculator = null;
 
 		switch (str) {
 		case ARABIC:
-			tmpCAlculator = new ArabicCalkulator();
-			break;
+			return new ArabicCalkulator();
 		case ROMAN:
-			tmpCAlculator = new RomanCalculator();
-			break;
+			return new RomanCalculator();
 		}
-		return tmpCAlculator;
+		return null;
 	}
 }

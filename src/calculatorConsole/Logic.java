@@ -16,7 +16,7 @@ public class Logic {
 //		перевірка операторів
 		for (int i = 1; i < operators.length; i++) {
 			if (!correctOperaror(operators[i])) {
-				System.out.println("некоректний оператор №" + i);
+				System.out.println("not a valid operator");
 				return null;
 			}
 		}
@@ -24,7 +24,7 @@ public class Logic {
 //		перевірка всіх чисел на коректність
 		for (int i = 0; i < numbers.length; i++) {
 			if (!(correctNumber(numbers[i]))) {
-				System.out.println("некоректне число №" + ++i);
+				System.out.println("not a valid number");
 				return null;
 			}
 		}
@@ -40,7 +40,7 @@ public class Logic {
 //		перевіряє чи всі елементи масиву оного типу
 		for (int i = 1; i < type.length; i++) {
 			if (type[i - 1] != type[i]) {
-				System.out.println("Всі число повинні бути одного типу");
+				System.out.println("all numbers must be of the same type!");
 				return null;
 			}
 		}
