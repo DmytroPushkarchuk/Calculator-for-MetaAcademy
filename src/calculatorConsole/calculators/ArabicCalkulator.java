@@ -11,25 +11,21 @@ public class ArabicCalkulator extends AbstractCalculator {
 
 	public void calculation(Data data) {
 
-//		зі строки-виразу вибирає всі оператори		
-		List<String> operators = new LinkedList<String>(Arrays.asList(data.matheExpression.split("[MDCLXVI0-9]+")));
+//		з виразу вибирає всі оператори		
+		List<String> operators = new LinkedList<String>(Arrays.asList(data.mathExpression.split("[MDCLXVI0-9]+")));
 		
-//		зі строки-виразу вибирає всі числа і конверту їх цілі числа
+//		з виразу вибирає всі арабські числа і конверту їх цілі числа
 		List<Integer> numbers = new LinkedList<Integer>(
-				Arrays.asList(data.matheExpression.split("[+*/-]"))
+				Arrays.asList(data.mathExpression.split("[+*/-]"))
 				.stream()
 				.map(Integer::valueOf)
 				.collect(Collectors.toList()));
-
 		
-		
-		
-		
-		
+//		отримання результату
 		Integer value = result(numbers, operators);
 		
 		if (value != null) 
-			System.out.println(data.matheExpression + "=" + value);	
+			System.out.println(data.mathExpression + "=" + value);	
 	}
 
 }

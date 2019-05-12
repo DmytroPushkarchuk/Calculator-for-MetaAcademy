@@ -32,8 +32,8 @@ public class MultiNoLimit extends Logic implements Input {
 				System.out.println(tmpStr + " is not correct! \n------------------------------------------------");
 			} else {
 				data.versionCalculator = typeCalculator(tmpStr);
-				data.matheExpression = tmpStr;
-				System.out.println(data.matheExpression + " is " + data.versionCalculator
+				data.mathExpression = tmpStr;
+				System.out.println(data.mathExpression + " is " + data.versionCalculator
 						+ " expression\n------------------------------------------------");
 			}
 		} while (data.versionCalculator == null);

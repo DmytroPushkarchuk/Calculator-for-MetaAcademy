@@ -35,8 +35,8 @@ public class MultiLimit extends Logic implements Input {
 				data.versionCalculator = null;
 			} else {
 				data.versionCalculator = typeCalculator(tmpStr);
-				data.matheExpression = tmpStr;
-				System.out.println(data.matheExpression + " is " + data.versionCalculator + " expression\n"
+				data.mathExpression = tmpStr;
+				System.out.println(data.mathExpression + " is " + data.versionCalculator + " expression\n"
 						+ "------------------------------------------------");
 			}
 		} while (data.versionCalculator == null);

@@ -51,9 +51,9 @@ public class OneNotLimit extends Logic implements Input {
 				data.versionCalculator = null;
 			} else {
 				data.versionCalculator = typeCalculator(str);
-				data.matheExpression = str;
+				data.mathExpression = str;
 				
-				System.out.println(data.matheExpression + " is " + data.versionCalculator + " expression\n"
+				System.out.println(data.mathExpression + " is " + data.versionCalculator + " expression\n"
 						+ "------------------------------------------------");
 			}
 
