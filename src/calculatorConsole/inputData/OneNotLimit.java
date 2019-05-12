@@ -46,15 +46,15 @@ public class OneNotLimit extends Logic implements Input {
 			}
 			System.out.println();
 			
-			if (blnCorrect && typeCalculator(str) != null) {
+			if (blnCorrect && typeCalculator(str) == null) {
+				System.out.println(str + " is not correct! \n------------------------------------------------");
+				data.versionCalculator = null;
+			} else {
 				data.versionCalculator = typeCalculator(str);
 				data.matheExpression = str;
-
+				
 				System.out.println(data.matheExpression + " is " + data.versionCalculator + " expression\n"
 						+ "------------------------------------------------");
-			} else {
-				System.out.println(str + " is not correct! \n" + "------------------------------------------------");
-				data.versionCalculator = null;
 			}
 
 		} while (data.versionCalculator == null);

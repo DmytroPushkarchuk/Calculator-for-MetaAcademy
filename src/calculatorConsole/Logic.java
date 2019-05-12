@@ -4,16 +4,16 @@ import calculatorConsole.calculators.VersionCalculator;
 
 public class Logic {
 
-//	визначення типу калькулятора, некоректний вираз = null
+//	РІРёР·РЅР°С‡РµРЅРЅСЏ С‚РёРїСѓ РєР°Р»СЊРєСѓР»СЏС‚РѕСЂР°, РїСЂРё РїРѕРјРёР»С†С– Сѓ РІРёСЂР°Р·С– РїРѕРІРµСЂС‚Р°С” null С– РґСЂСѓРєСѓС” РїРѕРјРёР»РєСѓ
 	public VersionCalculator typeCalculator(String data) {
-		
-// 		масив чисел
+
+// 		РјР°СЃРёРІ С‡РёСЃРµР»
 		String[] numbers = data.split("[+*/-]");
-//		масив операторів
+//		РјР°СЃРёРІ РѕРїРµСЂР°С‚РѕСЂС–РІ
 		String[] operators = data.split("[MDCLXVI0-9]+");
 		VersionCalculator[] type = new VersionCalculator[numbers.length];
 
-//		перевірка операторів
+//		РїРµСЂРµРІС–СЂРєР° РѕРїРµСЂР°С‚РѕСЂС–РІ
 		for (int i = 1; i < operators.length; i++) {
 			if (!correctOperaror(operators[i])) {
 				System.out.println("not a valid operator");
@@ -21,7 +21,7 @@ public class Logic {
 			}
 		}
 
-//		перевірка всіх чисел на коректність
+//		РїРµСЂРµРІС–СЂРєР° РІСЃС–С… С‡РёСЃРµР» РЅР° РєРѕСЂРµРєС‚РЅС–СЃС‚СЊ
 		for (int i = 0; i < numbers.length; i++) {
 			if (!(correctNumber(numbers[i]))) {
 				System.out.println("not a valid number");
@@ -29,7 +29,7 @@ public class Logic {
 			}
 		}
 
-// 		визначає тип кожного числа		
+// 		РІРёР·РЅР°С‡Р°С” С‚РёРї РєРѕР¶РЅРѕРіРѕ С‡РёСЃР»Р°	
 		for (int i = 0; i < type.length; i++) {
 			if (numbers[i].matches("\\d+"))
 				type[i] = VersionCalculator.ARABIC;
@@ -37,7 +37,7 @@ public class Logic {
 				type[i] = VersionCalculator.ROMAN;
 		}
 
-//		перевіряє чи всі елементи масиву оного типу
+//		РїРµСЂРµРІС–СЂСЏС” С‡Рё РІСЃС– РµР»РµРјРµРЅС‚Рё РјР°СЃРёРІСѓ РѕРЅРѕРіРѕ С‚РёРїСѓ
 		for (int i = 1; i < type.length; i++) {
 			if (type[i - 1] != type[i]) {
 				System.out.println("all numbers must be of the same type!");
@@ -48,7 +48,7 @@ public class Logic {
 		return type[0];
 	}
 
-//	перевірка на коректність числа
+//	РїРµСЂРµРІС–СЂРєР° РЅР° РєРѕСЂРµРєС‚РЅС–СЃС‚СЊ С‡РёСЃР»Р°
 	public Boolean correctNumber(String data) {
 		int tmpInt;
 
@@ -64,29 +64,14 @@ public class Logic {
 		return false;
 	}
 
-//	перевірка на коректність оператора
+//	РїРµСЂРµРІС–СЂРєР° РЅР° РєРѕСЂРµРєС‚РЅС–СЃС‚СЊ РѕРїРµСЂР°С‚РѕСЂР°
 	public Boolean correctOperaror(String data) {
-		if (data.matches("[+*/-]")) 
+		if (data.matches("[+*/-]"))
 			return true;
 		return false;
 	}
 
-//	перетворення римських цифер в арабські
-	public int convertRomanToArabic(String roman) {
-		int result = 0;
-		String uRoman = roman.toUpperCase();
-		for (int i = 0; i < uRoman.length() - 1; i++) {
-			if (decodeSingle(uRoman.charAt(i)) < decodeSingle(uRoman.charAt(i + 1))) {
-				result -= decodeSingle(uRoman.charAt(i));
-			} else {
-				result += decodeSingle(uRoman.charAt(i));
-			}
-		}
-		result += decodeSingle(uRoman.charAt(uRoman.length() - 1));
-		return result;
-	}
-
-//	перетвонення арабських цифер і римські
+//	РїРµСЂРµС‚РІРѕРЅРµРЅРЅСЏ Р°СЂР°Р±СЃСЊРєРёС… С†РёС„РµСЂ РІ СЂРёРјСЃСЊРєС–
 	public String convertArabicToRoman(int input) {
 
 		if (input < 1 || input > 3999)
@@ -146,6 +131,21 @@ public class Logic {
 			input -= 1;
 		}
 		return s;
+	}
+
+//  РїРµСЂРµС‚РІРѕСЂРµРЅРЅСЏ СЂРёРјСЃСЊРєРёС… С†РёС„РµСЂ РІ Р°СЂР°Р±СЃСЊРєС–
+	public int convertRomanToArabic(String roman) {
+		int result = 0;
+		String uRoman = roman.toUpperCase();
+		for (int i = 0; i < uRoman.length() - 1; i++) {
+			if (decodeSingle(uRoman.charAt(i)) < decodeSingle(uRoman.charAt(i + 1))) {
+				result -= decodeSingle(uRoman.charAt(i));
+			} else {
+				result += decodeSingle(uRoman.charAt(i));
+			}
+		}
+		result += decodeSingle(uRoman.charAt(uRoman.length() - 1));
+		return result;
 	}
 
 	private static int decodeSingle(char letter) {

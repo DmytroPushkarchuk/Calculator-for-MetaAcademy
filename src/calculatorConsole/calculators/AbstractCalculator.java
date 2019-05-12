@@ -2,14 +2,8 @@ package calculatorConsole.calculators;
 
 import java.util.List;
 
-import calculatorConsole.Data;
 
 public abstract class AbstractCalculator implements Calculator {
-
-	@Override
-	public void calculation(Data data) {
-
-	}
 
 	protected Integer result(List<Integer> numbers, List<String> operators) {
 
@@ -17,7 +11,7 @@ public abstract class AbstractCalculator implements Calculator {
 			return numbers.get(0);
 		}
 
-//		першочергаве виконання операцій множення і ділиння
+//		РїРµСЂС€РѕС‡РµСЂРіРѕРІРµ РІРёРєРѕРЅР°РЅРЅСЏ РѕРїРµСЂР°С†С–Р№ РјРЅРѕР¶РµРЅРЅСЏ С– РґС–Р»РёРЅРЅСЏ
 		for (int i = 1; i < operators.size(); i++) {
 			if ((operators.get(i).equals("*")) || (operators.get(i).equals("/"))) {
 				
@@ -27,7 +21,7 @@ public abstract class AbstractCalculator implements Calculator {
 					break;
 				case "/":
 					if (numbers.get(i) == 0) {
-						System.out.println("помилка ділення на 0");
+						System.out.println("division error by 0!");
 						return null;
 					}
 					numbers.set(i - 1, numbers.get(i - 1) / numbers.get(i));
@@ -37,12 +31,12 @@ public abstract class AbstractCalculator implements Calculator {
 				numbers.remove(i);
 				operators.remove(i);
 
-//				інкапсуляція
+//				С–РЅРєР°РїСЃСѓР»СЏС†С–СЏ
 				return result(numbers, operators);
 			}
 		}
 
-//		виконання операцій додавання і відіймання
+//		РІРёРєРѕРЅР°РЅРЅСЏ РѕРїРµСЂР°С†С–Р№ РґРѕРґР°РІР°РЅРЅСЏ С– РІС–РґС–Р№РјР°РЅРЅСЏ
 		int in = numbers.get(0);
 
 		for (int i = 1; i < operators.size(); i++) {

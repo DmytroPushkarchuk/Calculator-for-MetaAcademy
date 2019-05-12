@@ -27,11 +27,11 @@ public class Calculator {
 
 	private Double memory = null;
 
-	static String textBtnAll[] = { "MC", "M+", "M-", "MR", "<-", "C", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*",
+	private static String textBtnAll[] = { "MC", "M+", "M-", "MR", "<-", "C", "%", "+", "7", "8", "9", "-", "4", "5", "6", "*",
 			"1", "2", "3", "/", ".", "0", "+/-", "=" };
-	static Set<String> memoryBtn = Stream.of("MC", "M+", "M-", "MR").collect(Collectors.toSet());
-	static Set<String> operatorsBtn = Stream.of("+", "-", "*", "/", "%", "=").collect(Collectors.toSet());
-	static Set<String> editBtn = Stream.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "<-", "+/-", "C")
+	private static Set<String> memoryBtn = Stream.of("MC", "M+", "M-", "MR").collect(Collectors.toSet());
+	private static Set<String> operatorsBtn = Stream.of("+", "-", "*", "/", "%", "=").collect(Collectors.toSet());
+	private static Set<String> editBtn = Stream.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "<-", "+/-", "C")
 			.collect(Collectors.toSet());
 
 	private JFrame fCalculator;

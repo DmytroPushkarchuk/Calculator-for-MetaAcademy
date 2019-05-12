@@ -3,6 +3,7 @@ package calculatorConsole.calculators;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import calculatorConsole.Data;
 import calculatorConsole.Logic;
@@ -13,16 +14,22 @@ public class RomanCalculator extends AbstractCalculator {
 
 	public void calculation(Data data) {
 
+//		зі строки-виразу вибирає всі оператори
 		List<String> operators = new LinkedList<String>(Arrays.asList(data.matheExpression.split("[MDCLXVI0-9]+")));
 
-		List<String> tmpNumbs = new LinkedList<String>(Arrays.asList(data.matheExpression.split("[+*/-]")));
-
-		List<Integer> numbers = new LinkedList<Integer>();
-
-		for (int i = 0; i < tmpNumbs.size(); i++)
-			numbers.add(logic.convertRomanToArabic(tmpNumbs.get(i)));
-
-		System.out.println(data.matheExpression + "=" + logic.convertArabicToRoman(result(numbers, operators)));
+//		зі строки-виразу вибирає всі римські числа і конвертує їх цілі числа
+		List<Integer> numbers = new LinkedList<Integer>(
+				Arrays.asList(data.matheExpression.split("[+*/-]"))
+				.stream()
+				.map(logic::convertRomanToArabic)
+				.collect(Collectors.toList()));
+		
+//		отримання результату
+		Integer value = result(numbers, operators);
+		
+		if (value != null) 
+			System.out.println(data.matheExpression + "=" + logic.convertArabicToRoman(value));
+		
 	}
 
 }

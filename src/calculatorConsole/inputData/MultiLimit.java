@@ -10,14 +10,15 @@ public class MultiLimit extends Logic implements Input {
 	Scanner scanner = new Scanner(System.in);
 
 	public MultiLimit() {
-		System.out.println("Version: 'multi-opn erators with limits'\n\n"
+		System.out.println(
+				"Version: 'multi-operators with limits'\n\n" 
 				+ "  limits:\n" 
 				+ "    0 <= Arabics numbs <= 10 \n"
 				+ "    I <= Romans numbs <= X\n"
-				+ "  examples:\n"
-				+ "    2+5*8-5/10\n"
+				+ "  examples:\n" 
+				+ "    2+5*8-5/10\n" 
 				+ "    V-I*IX+II/I\n"
-				+ "  is not case-sensitive and space\n"
+				+ "  not sensitive to lowercase and space\n" 
 				+ "------------------------------------------------");
 	}
 
@@ -28,18 +29,15 @@ public class MultiLimit extends Logic implements Input {
 			System.out.print("Enter an expression: ");
 			tmpStr = scanner.nextLine().toUpperCase().replaceAll("\\s+", "");
 			System.out.println();
-			
-		
-			
-			if (typeCalculator(tmpStr) != null) {
+
+			if (typeCalculator(tmpStr) == null) {
+				System.out.println(tmpStr + " is not correct!\n------------------------------------------------");
+				data.versionCalculator = null;
+			} else {
 				data.versionCalculator = typeCalculator(tmpStr);
 				data.matheExpression = tmpStr;
-
 				System.out.println(data.matheExpression + " is " + data.versionCalculator + " expression\n"
 						+ "------------------------------------------------");
-			} else {
-				System.out.println(tmpStr + " is not correct! \n" + "------------------------------------------------");
-				data.versionCalculator = null;
 			}
 		} while (data.versionCalculator == null);
 
@@ -50,13 +48,13 @@ public class MultiLimit extends Logic implements Input {
 		int tmpInt;
 
 		if (data.matches("\\d+"))
-			if (Integer.valueOf(data) >= 0 && Integer.valueOf(data) <= 10) 
+			if (Integer.valueOf(data) >= 0 && Integer.valueOf(data) <= 10)
 				return true;
 
 		if (data.matches("[MDCLXVI]+")) {
 			tmpInt = convertRomanToArabic(data);
-			if (data.equals(convertArabicToRoman(tmpInt))) 
-				if (tmpInt >= 1 && tmpInt <= 10) 
+			if (data.equals(convertArabicToRoman(tmpInt)))
+				if (tmpInt >= 1 && tmpInt <= 10)
 					return true;
 		}
 

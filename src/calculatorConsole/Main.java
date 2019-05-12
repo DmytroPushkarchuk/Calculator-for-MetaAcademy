@@ -22,7 +22,7 @@ public class Main {
 		do {
 			VersionInput versionInput = null;
 			do {
-				System.out.print("\nVersions calculators:\n\n"
+				System.out.print("\nVersions calculator:\n\n"
 						+ "  'one operator with limits'        (1)\n"
 						+ "  'one operator without limits'     (2)\n"
 						+ "  'multi-operators with limits'     (3)\n"
@@ -31,7 +31,7 @@ public class Main {
 				str = scanner.next();
 				switch (str) {
 				case "1":
-					versionInput = VersionInput.MULTI_LIMIT;
+					versionInput = VersionInput.ONE_LIMIT;
 					break;
 				case "2":
 					versionInput = VersionInput.ONE_NO_LIMIT;
