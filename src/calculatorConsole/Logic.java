@@ -1,72 +1,90 @@
 package calculatorConsole;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import calculatorConsole.calculators.VersionCalculator;
 
 public class Logic {
 
-//	визначення типу калькулятора, при помилці у виразі повертає null і друкує помилку
-	public VersionCalculator typeCalculator(String data) {
+/*	визначення типу калькулятора і перевіряє вираз на валідність,
+    при помилці у виразі повертає null і друкує помилку */
+	public VersionCalculator typeCalculator(String expression) {
 
-// 		масив чисел
-		String[] numbers = data.split("[+*/-]");
-//		масив операторів
-		String[] operators = data.split("[MDCLXVI0-9]+");
-		VersionCalculator[] type = new VersionCalculator[numbers.length];
+// 		колекція чисел
+		List<String> numbers = Arrays.asList(expression.split("[+*/-]"));
+//		колекція операторів
+		List<String> operators = Arrays.asList(expression.split("[MDCLXVI0-9]+"));
+		
+		List<VersionCalculator> types = new ArrayList<>();
 
+		
+//		перевірка кількості операторів
+		if (operators.size() != numbers.size()) {
+			System.out.println("problem with operators!");
+			return null;
+		}
+		
 //		перевірка операторів
-		for (int i = 1; i < operators.length; i++) {
-			if (!correctOperaror(operators[i])) {
-				System.out.println("not a valid operator");
+		for (int i = 1; i < operators.size(); i++) {
+			if (!correctOperator(operators.get(i))) {
+				System.out.println("not a valid operator!");
 				return null;
 			}
 		}
 
 //		перевірка всіх чисел на коректність
-		for (int i = 0; i < numbers.length; i++) {
-			if (!(correctNumber(numbers[i]))) {
-				System.out.println("not a valid number");
+		for (int i = 0; i < numbers.size(); i++) {
+			if (!(correctNumber(numbers.get(i)))) {
+				System.out.println("not a valid number!");
 				return null;
 			}
 		}
 
-// 		визначає тип кожного числа	
-		for (int i = 0; i < type.length; i++) {
-			if (numbers[i].matches("\\d+"))
-				type[i] = VersionCalculator.ARABIC;
-			if (numbers[i].matches("[MDCLXVI]+"))
-				type[i] = VersionCalculator.ROMAN;
+// 		визначення типу кожного числа	
+		for (int i = 0; i < numbers.size(); i++) {
+			if (numbers.get(i).matches("\\d+"))
+				types.add(i, VersionCalculator.ARABIC);
+			if (numbers.get(i).matches("[MDCLXVI]+"))
+				types.add(i, VersionCalculator.ROMAN);
 		}
 
-//		перевіряє чи всі елементи масиву оного типу
-		for (int i = 1; i < type.length; i++) {
-			if (type[i - 1] != type[i]) {
+//		перевіряє чи всі елементи одного типу
+		for (int i = 1; i < types.size(); i++) {
+			if (types.get(i-1) != types.get(i)) {
 				System.out.println("all numbers must be of the same type!");
 				return null;
 			}
 		}
 
-		return type[0];
+		return types.get(0);
 	}
-
+	
 //	перевірка на коректність числа
-	public Boolean correctNumber(String data) {
-		int tmpInt;
+	public Boolean correctNumber(String number) {
 
-		if (data.matches("\\d+"))
+		if (number.matches("\\d+")) {
+			try {
+				Integer.valueOf(number);
+			} catch (Exception e) {
+				System.out.println("goes beyond the range of an integer");
+				return false;
+			}
 			return true;
-
-		if (data.matches("[MDCLXVI]+")) {
-			tmpInt = convertRomanToArabic(data);
-			if (data.equals(convertArabicToRoman(tmpInt)))
+		}
+		
+		int tmpInt = convertRomanToArabic(number);
+		if (number.matches("[MDCLXVI]+")) {
+			if (number.equals(convertArabicToRoman(tmpInt)))
 				return true;
 		}
-
 		return false;
 	}
 
 //	перевірка на коректність оператора
-	public Boolean correctOperaror(String data) {
-		if (data.matches("[+*/-]"))
+	public Boolean correctOperator(String operator) {
+		if (operator.matches("[+*/-]"))
 			return true;
 		return false;
 	}
@@ -75,6 +93,7 @@ public class Logic {
 	public String convertArabicToRoman(int input) {
 
 		if (input < 1 || input > 3999)
+			
 			return "invalid roman number value";
 		String s = "";
 

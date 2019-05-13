@@ -1,10 +1,8 @@
 package calculatorConsole.calculators;
 
-import calculatorConsole.Data;
-
 public interface Calculator {
 	
-	void calculation (Data data);
+	void calculation (String expression);
 }
 	
 	

@@ -13,7 +13,6 @@ public class FactoryInput {
 			return new MultiLimit();
 		case MULTI_NO_LIMIT:
 			return new MultiNoLimit();
-
 		}
 		return null;
 	}

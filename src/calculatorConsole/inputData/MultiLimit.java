@@ -11,36 +11,32 @@ public class MultiLimit extends Logic implements Input {
 
 	public MultiLimit() {
 		System.out.println(
-				"Version: 'multi-operators with limits'\n\n" 
+				"Version: 'multi-operators with limits'\n" 
 				+ "  limits:\n" 
 				+ "    0 <= Arabics numbs <= 10 \n"
 				+ "    I <= Romans numbs <= X\n"
-				+ "  examples:\n" 
-				+ "    2+5*8-5/10\n" 
-				+ "    V-I*IX+II/I\n"
-				+ "  not sensitive to lowercase and space\n" 
+				+ "  examples: 5*8-5/10 or V+IX*IX/II/I\n"
+				+ "  not sensitive to case and space\n" 
 				+ "------------------------------------------------");
 	}
 
 	@Override
 	public void inputData(Data data) {
-		String tmpStr;
+		String strScanner;
 		do {
 			System.out.print("Enter an expression: ");
-			tmpStr = scanner.nextLine().toUpperCase().replaceAll("\\s+", "");
-			System.out.println();
+			strScanner = scanner.nextLine().toUpperCase().replaceAll("\\s+", "");
 
-			if (typeCalculator(tmpStr) == null) {
-				System.out.println(tmpStr + " is not correct!\n------------------------------------------------");
-				data.versionCalculator = null;
+			data.versionCalculator = typeCalculator(strScanner);
+			
+			if (data.versionCalculator != null) {
+				data.mathExpression = strScanner;
 			} else {
-				data.versionCalculator = typeCalculator(tmpStr);
-				data.mathExpression = tmpStr;
-				System.out.println(data.mathExpression + " is " + data.versionCalculator + " expression\n"
-						+ "------------------------------------------------");
+				System.out.println(strScanner + " is not correct! \n");
 			}
+			System.out.println("------------------------------------------------");
 		} while (data.versionCalculator == null);
-
+		
 	}
 
 	@Override
@@ -48,12 +44,14 @@ public class MultiLimit extends Logic implements Input {
 		int tmpInt;
 
 		if (data.matches("\\d+"))
+//			ліміти арабських чисел
 			if (Integer.valueOf(data) >= 0 && Integer.valueOf(data) <= 10)
 				return true;
 
 		if (data.matches("[MDCLXVI]+")) {
 			tmpInt = convertRomanToArabic(data);
 			if (data.equals(convertArabicToRoman(tmpInt)))
+//				ліміти римських чисел
 				if (tmpInt >= 1 && tmpInt <= 10)
 					return true;
 		}

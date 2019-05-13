@@ -6,56 +6,55 @@ import calculatorConsole.Data;
 import calculatorConsole.Logic;
 
 public class OneNotLimit extends Logic implements Input {
-	Data myClass = new Data();
+	
 	Scanner scanner = new Scanner(System.in);
 
 	public OneNotLimit() {
 		System.out.println(
-				"Version: 'one operator without limits'\n" + "------------------------------------------------");
+				"Version: 'one operator without limits'" 
+				+ "------------------------------------------------");
 	}
 
 	@Override
 	public void inputData(Data data) {
 		do {
 			String str = null;
-			String tmpStr = null;
-			Boolean blnCorrect = true;
+			String strScanner = null;
+			Boolean b = true;
 
 			System.out.print("please enter the first number:  ");
-			tmpStr = scanner.next().toUpperCase();
-			str = tmpStr.toUpperCase();
-			if (!correctNumber(tmpStr)) {
+			strScanner = scanner.nextLine().toUpperCase().replaceAll("\\s+", "");
+			str = strScanner;
+			if (!correctNumber(strScanner)) {
 				System.out.println("  number is NOT correct");
-				blnCorrect = false;
+				b = false;
 			}
 
 			System.out.print("please enter the operator:      ");
-			tmpStr = scanner.next();
-			str += tmpStr;
-			if (!correctOperaror(tmpStr)) {
-				System.out.println("operator is NOT correct");
-				blnCorrect = false;
+			strScanner = scanner.nextLine().replaceAll("\\s+", "");
+			str += strScanner;
+			if (!correctOperator(strScanner)) {
+				System.out.println("  operator is NOT correct");
+				b = false;
 			}
 
 			System.out.print("please enter the second number: ");
-			tmpStr = scanner.next().toUpperCase();
-			str += tmpStr;
-			if (!correctNumber(tmpStr)) {
-				System.out.println("   number is NOT correct");
-				blnCorrect = false;
+			strScanner = scanner.nextLine().toUpperCase().replaceAll("\\s+", "");
+			str += strScanner;
+			if (!correctNumber(strScanner)) {
+				System.out.println("  number is NOT correct");
+				b = false;
 			}
-			System.out.println();
+
+			data.versionCalculator = typeCalculator(str);
 			
-			if (blnCorrect && typeCalculator(str) == null) {
-				System.out.println(str + " is not correct! \n------------------------------------------------");
-				data.versionCalculator = null;
-			} else {
-				data.versionCalculator = typeCalculator(str);
+			if (b && data.versionCalculator != null) {
 				data.mathExpression = str;
-				
-				System.out.println(data.mathExpression + " is " + data.versionCalculator + " expression\n"
-						+ "------------------------------------------------");
+			} else {
+				data.versionCalculator = null;
+				System.out.println(str + " is not correct!");
 			}
+			System.out.println("------------------------------------------------");
 
 		} while (data.versionCalculator == null);
 	}

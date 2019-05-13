@@ -11,33 +11,28 @@ public class MultiNoLimit extends Logic implements Input {
 
 	public MultiNoLimit() {
 		System.out.println(
-				"Version: 'multi-operators without limits'\n\n"
-				+ "  examples:\n"
-				+ "    225+5589*8-565/10\n"
-				+ "    LXV+C*IX+LXXIV/I*IV\n"
-				+ "  not sensitive to lowercase and space\n"
+				"Version: 'multi-operators without limits'\n"
+				+ "  examples: 225+589*8-565/10 or C*IX+LXXIV/I*IV\n"
+				+ "  not sensitive to case and space\n"
 				+ "------------------------------------------------");
 	}
 
 	@Override
 	public void inputData(Data data) {
-		String tmpStr;
+		String strScanner;
 		do {
 			System.out.print("Enter an expression: ");
-			tmpStr = scanner.nextLine().toUpperCase().replaceAll("\\s+", "");
-			System.out.println();
+			strScanner = scanner.nextLine().toUpperCase().replaceAll("\\s+", "");
 
-			if (typeCalculator(tmpStr) == null) {
-				data.versionCalculator = null;
-				System.out.println(tmpStr + " is not correct! \n------------------------------------------------");
+			data.versionCalculator = typeCalculator(strScanner);
+			
+			if (data.versionCalculator != null) {
+				data.mathExpression = strScanner;
 			} else {
-				data.versionCalculator = typeCalculator(tmpStr);
-				data.mathExpression = tmpStr;
-				System.out.println(data.mathExpression + " is " + data.versionCalculator
-						+ " expression\n------------------------------------------------");
+				System.out.println(strScanner + " is not correct!");
 			}
+			System.out.println("------------------------------------------------");
 		} while (data.versionCalculator == null);
-
 	}
 
 }
