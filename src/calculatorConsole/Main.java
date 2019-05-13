@@ -16,11 +16,11 @@ public class Main {
 		FactoryInput factoryInput = new FactoryInput();
 		FactoryCalculator factoryCalculator = new FactoryCalculator();
 
-		VersionInput versionInput;
+		VersionInput versionInput = null;
 		String str = null;
 		Scanner scanner = new Scanner(System.in);
 
-		versionInput = null;
+		
 		do {
 			System.out.print("Versions calculator:\n" 
 					+ "  'one operator with limits'        (1)\n"
@@ -46,9 +46,10 @@ public class Main {
 				System.out.println("------------------------------------------------" 
 						+ "\nInvalid key, try again!");
 			}
-
+			
 			System.out.println("------------------------------------------------");
 		} while (versionInput == null);
+
 
 		do {
 			Input input = factoryInput.createInput(versionInput);
@@ -62,6 +63,7 @@ public class Main {
 			str = scanner.next().toUpperCase();
 			System.out.println("------------------------------------------------");
 		} while (!str.equals("Y"));
+
 
 		scanner.close();
 	}

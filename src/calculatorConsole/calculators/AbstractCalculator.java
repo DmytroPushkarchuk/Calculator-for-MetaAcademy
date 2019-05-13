@@ -8,7 +8,7 @@ public abstract class AbstractCalculator implements Calculator {
 //	проводить розрахунки, при помилці ділення на 0 повертає null і друкує помилку
 	protected Integer result(List<Integer> numbers, List<String> operators) {
 
-		if (operators.size() == 1) {
+		if (numbers.size() == 1) {
 			return numbers.get(0);
 		}
 
@@ -32,7 +32,6 @@ public abstract class AbstractCalculator implements Calculator {
 				numbers.remove(i);
 				operators.remove(i);
 
-//				інкапсуляція
 				return result(numbers, operators);
 			}
 		}

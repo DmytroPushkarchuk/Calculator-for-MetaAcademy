@@ -11,9 +11,9 @@ public class RomanCalculator extends AbstractCalculator {
 
 	Logic logic = new Logic();
 
+	@Override
 	public void calculation(String expression) {
 
-//		з виразу вибирає всі оператори
 		List<String> operators = new LinkedList<String>(Arrays.asList(expression.split("[MDCLXVI0-9]+")));
 
 //		з виразу вибирає всі римські числа і конвертує їх цілі числа

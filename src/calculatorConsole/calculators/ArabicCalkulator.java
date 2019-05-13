@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class ArabicCalkulator extends AbstractCalculator {
 
+	@Override
 	public void calculation(String expression) {
 
 //		з виразу вибирає всі оператори		
